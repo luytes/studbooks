@@ -8,10 +8,9 @@ gem 'puma'
 gem 'rails', '5.0.2'
 gem 'redis'
 gem 'devise'
-gem 'figaro'
 gem "letter_opener", group: :development
 gem 'cloudinary'
-
+gem 'carrierwave', '~> 1.0'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
