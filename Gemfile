@@ -8,7 +8,7 @@ gem 'puma'
 gem 'rails', '5.0.2'
 gem 'redis'
 gem 'devise'
-
+gem 'figaro'
 
 
 gem 'autoprefixer-rails'
