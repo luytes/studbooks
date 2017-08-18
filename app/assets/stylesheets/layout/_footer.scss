@@ -1,1 +1,79 @@
-// Your footer style
+.footer-white {
+  background-color: #191919;
+  padding: 30px 0 10px 0;
+  margin-top: 50px;
+  z-index: 0;
+  width: 100%;
+  position: absolute;
+  ul {
+    margin: 0;
+  }
+  li {
+    color: white;
+  }
+}
+.footer-white .fa {
+  font-size: 25px;
+  padding: 0 15px;
+  color: white;
+  transition: 1s ease;
+}
+.footer-white p {
+  color: white;
+}
+.footer-white .fa:hover {
+  color: lightcoral;
+}
+.gen-footer-links {
+  float: left;
+  a {
+    line-height: 1.875em;
+    margin-bottom: 1em;
+    float: left;
+    color: white;
+    transition: all 0.3s ease-in-out;
+  }
+}
+.gen-footer-links a:hover {
+  color: #E6E6E6;
+  text-decoration: underline;
+}
+.gen-footer-header {
+  margin-bottom: 1em;
+  span {
+    color: white;
+    height: 20px;
+    opacity: .8;
+    font-size: 1em;
+    font-weight: 600;
+    letter-spacing: 0.063em;
+    // padding-right: 6.875em;
+  }
+}
+.gen-footer-detail {
+  margin-bottom: 1em;
+  font-size: 0.875em;
+  font-weight: 500;
+}
+.footer-column {
+  color: white;
+  letter-spacing: 0.063em;
+  text-align: left;
+}
+.footer-content {
+  font-size: 0.875em;
+  font-weight: 500;
+  p {
+    margin: 0;
+  }
+}
+.footer-subheader {
+  padding-bottom: 0.5em;
+}
+.footer-detail {
+  padding-bottom: 0.5em;
+}
+.footer-copyright {
+  padding-top: 6em;
+  font-size: 0.875em;
+}
