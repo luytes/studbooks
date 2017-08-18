@@ -10,6 +10,7 @@ gem 'redis'
 gem 'devise'
 gem 'figaro'
 gem "letter_opener", group: :development
+gem 'cloudinary'
 
 
 gem 'autoprefixer-rails'
