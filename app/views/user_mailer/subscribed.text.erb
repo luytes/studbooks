@@ -1,0 +1,6 @@
+We have a new customer!
+
+<%= @user.full_name %> just subscribed to one of our services.
+On <%= @order.created_at.strftime("%B #{@order.created_at.day.ordinalize}, %Y") %>, our customer started a subscription for <%= @order.service.title %>
+
+Chemi, this message is auto-generated.

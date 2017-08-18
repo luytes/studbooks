@@ -1,0 +1,6 @@
+<p>We have a new customer!</p>
+
+<p><span style="font-weight: bold"><%= @user.full_name %></span> just subscribed to one of our services.</p>
+<p>On <%= @order.created_at.strftime("%B #{@order.created_at.day.ordinalize}, %Y") %>, our customer started a subscription for <span style="font-weight: bold"><%= @order.service.title %></span>.</p>
+
+<p>Chemi, this message is auto-generated.</p>

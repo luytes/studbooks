@@ -1,0 +1,8 @@
+<p>Hi <%= @user.full_name %></p>
+
+<p>Thank you for signing up with us! You're only one step away from having your personal student.</p>
+<p>To confirm your registration, please click on the URL below</p>
+
+<a href="<%= confirm_email_user_url(@user.confirm_token) %>"><%= confirm_email_user_url(@user.confirm_token) %></a>
+
+<p>Genstudent</p>
