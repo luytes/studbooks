@@ -1,2 +1,14 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<% if flash[:thanks] %>
+   <div class="alert alert-info"><%= flash[:thanks] %></div>
+ <% end %>
+<div class="container-fluid banner bg-picture" id="change_color" style="background-image: linear-gradient(-225deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.35) 50%), url('<%= asset_path('banner_logo.jpg') %>')">
+  <div class="row">
+    <div class="banner-content">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 text-center">
+        <h1>
+          <span>Studbooks</span><br><h2>Buy books while helping the planet<br></h2>
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
