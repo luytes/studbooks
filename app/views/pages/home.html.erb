@@ -5,9 +5,20 @@
   <div class="row">
     <div class="banner-content">
       <div class="col-xs-12 col-sm-10 col-sm-offset-1 text-center">
-        <h1>
-          <span>Studbooks</span><br><h2>Buy books while helping the planet<br></h2>
-        </h1>
+        <h1>Studbooks</h1>
+        <h2>From students for students</h2>
+      </div>
+      <div class="search-bar">
+        <div class="form-inline aa-input-container invisible-search">
+          <%= simple_form_for [@book], url: books_path, method: :get do |f| %>
+          <ul class="list-inline">
+            <li><%= f.input :title, required: false, placeholder: "Title, author, IBAN...", label: false %></li>
+            <li><%= f.country_select :country, required: false, label: false %></li>
+            <li><%= f.input :university, required: false, placeholder: "University", label: false %></li>
+          </ul>
+            <%= f.button :submit, 'search',  class: "btn"  %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
