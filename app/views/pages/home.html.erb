@@ -12,15 +12,9 @@
         <div class="form-inline aa-input-container invisible-search">
           <%= simple_form_for [@book], url: books_path, method: :get do |f| %>
           <ul class="list-inline">
-            <li>
-              test
-            </li>
-            <li><h2>looking for a</h2></li>
-            <li>
-              test2
-            </li>
-            <li><h2> project</h2></li>
-            <li>test3</li>
+            <li><%= f.input :title, required: false, placeholder: "Title, author, IBAN...", label: false %></li>
+            <li><%= f.country_select :country, required: false, label: false %></li>
+            <li><%= f.input :university, required: false, placeholder: "University", label: false %></li>
           </ul>
             <%= f.button :submit, 'search',  class: "btn"  %>
           <% end %>

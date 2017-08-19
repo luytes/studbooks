@@ -1,4 +1,71 @@
-/* -------------------------------------
- * CSS code specific to home page
- * (margin/padding adjustments)
- * ------------------------------------- */
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+.search-bar {
+  text-align: left;
+}
+.search-bar input {
+  // nothing
+}
+.search-bar label {
+  color: black;
+}
+.search-bar .btn {
+  border-radius: 0;
+  background: transparent;
+  color: lightcoral;
+  border: solid 2px;
+  padding: 10px 15px;
+  margin-top: 17px;
+  font-size: 25px;
+  font-weight: 300;
+}
+.search-bar .btn:hover {
+  box-shadow: none;
+  border-radius: 0;
+  color: white;
+  background-color: transparent;
+  border: solid 2px;
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: $light-blue !important;
+    background-color: transparent !important;
+    opacity: 0.5;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: $light-blue !important;
+   background-color: transparent !important;
+   opacity: 0.5;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: $light-blue !important;
+   background-color: transparent !important;
+   opacity: 0.5;
+}
+
+:-ms-input-placeholder {
+   color: $light-blue;
+   background-color: transparent !important;
+   opacity: 0.5;
+}
+
+
+.invisible-search {
+  .form-control:focus {
+    box-shadow: none;
+  }
+  option {
+    background-color: transparent !important;
+  }
+  select {
+    background-color: transparent !important;
+    padding: 5px;
+    border: 0px;
+    outline: 0px;
+  }
+}
