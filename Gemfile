@@ -24,6 +24,7 @@ gem "geocoder"
 gem 'stripe'
 gem 'letter_opener', group: :development
 gem 'postmark-rails'
+gem 'country_select'
 
 gem "coffee-rails"
 gem "coffee-script"
