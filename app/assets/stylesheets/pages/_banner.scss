@@ -1,0 +1,72 @@
+.banner {
+  color: white;
+  text-align: center;
+  height: 96.75vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  span {
+    font-weight: 400;
+  }
+}
+.banner h1 {
+  font-size: 3.75em;
+  letter-spacing: 0.02em;
+  font-weight: 300;
+  text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
+  line-height: 120%;
+}
+.banner h2 {
+  font-size: 32px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 20px;
+}
+.bordered {
+  border-radius: 50px;
+  width: 330px;
+  height: 55px;
+  font-weight: 300;
+  text-transform: uppercase;
+  background: $light-blue;
+  border: 2px solid $light-blue;
+  border-radius: 3em;
+  font-size: 1.125em;
+  padding: 0.8em;
+  transition: all .4s ease-in-out;
+  color: white;
+}
+.bordered:hover {
+  color: white;
+  background-color: $blue;
+  border: 2px solid $blue;
+}
+.student-bordered {
+  border-radius: 50px;
+  width: 330px;
+  height: 55px;
+  font-weight: 300;
+  text-transform: uppercase;
+  background: transparent;
+  background-color: $light-blue;
+  border-radius: 3em;
+  font-size: 1.125em;
+  padding: 0.8em;
+  transition: all .4s ease-in-out;
+  color: white;
+}
+.student-bordered:hover {
+  color: white;
+  background-color: $blue;
+}
+.gen-home-student {
+  color: white;
+  text-decoration: underline;
+  transition: 0.3s ease
+}
+.gen-home-student:hover {
+  color: #E6E6E6;
+}
