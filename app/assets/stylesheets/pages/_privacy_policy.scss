@@ -1,0 +1,33 @@
+.gen-privacy {
+  font-size: 1.125em;
+  padding: 0 55px;
+  line-height: 1.750em;
+  font-weight: 300;
+  font-family: "Raleway", "Helvetica", "cursive";
+  a {
+    color: #393F44;
+    text-decoration: underline;
+  }
+  p {
+    margin: 0;
+    letter-spacing: 0.025em;
+  }
+  ul {
+    margin: 0.689em 0;
+  }
+}
+.gen-privacy-section {
+  margin-top: 1.25em;
+}
+.gen-privacy-subheader {
+  font-weight: 600;
+  color: #393F44;
+}
+.gen-privacy-cursive {
+  font-style: italic;
+}
+@media only screen and (max-device-width: 480px) {
+  .gen-privacy {
+    padding: 0;
+  }
+}
