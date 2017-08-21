@@ -8,7 +8,7 @@ class Book < ApplicationRecord
   validates :field, presence: true
   validates :condition, presence: true
   validates :picture, presence: true
-  validates :state, presence: true
+  # validates :state, presence: true
   validates :price_cents, presence: true
 
   monetize :price_cents
