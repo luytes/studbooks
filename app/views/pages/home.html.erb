@@ -13,8 +13,10 @@
           <%= simple_form_for [@book], url: books_path, method: :get do |f| %>
           <ul class="list-inline">
             <li><%= f.input :title, required: false, placeholder: "Title, author, IBAN...", label: false %></li>
-            <li><%= f.country_select :country, required: false, label: false %></li>
-            <li><%= f.input :university, required: false, placeholder: "University", label: false %></li>
+            <%= simple_form_for [@user] do |r| %>
+              <li><div><%= r.country_select :country, required: false, label: false %></div></li>
+              <li><%= r.input :university, required: false, placeholder: "University", label: false %></li>
+            <% end %>
           </ul>
             <%= f.button :submit, 'search',  class: "btn"  %>
           <% end %>

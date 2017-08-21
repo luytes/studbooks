@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :books
+  resources :books do
+    resources :users
+  end
   resources :users do
     member do
       get :confirm_email
