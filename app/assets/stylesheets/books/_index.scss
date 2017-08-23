@@ -1,0 +1,122 @@
+@import "show";
+
+.index-card {
+  background-color: white;
+  box-shadow: 1px;
+  box-shadow: 0 0 5px grey;
+  margin-bottom: 1.25em;
+}
+.index-card:hover {
+  text-decoration: none;
+  opacity: 0.8;
+  transition: all .3s ease-in-out;
+}
+.index-card-img {
+  height: 175px;
+}
+.index-card-content {
+  height: 190px;
+  padding: 25px 1.5em 1.5em 1.5em;
+  position: relative;
+  font-size: 1em;
+}
+.index-card-title {
+  color: black;
+  font-size: 1em;
+  font-weight: 600;
+}
+.index-card-description h5 {
+  color: #5E5266;
+  font-size: .875em;
+  max-width: 100%;
+  line-height: 1.6;
+}
+.index-card-description:hover {
+  text-decoration: none
+}
+.index-card-student {
+  position: absolute;
+  bottom: 14px;
+  h5 {
+    font-weight: 600;
+  }
+}
+.index-category {
+  padding: 25px 35px;
+  margin: 20px 0;
+  color: black;
+  text-decoration: none;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.index-category:hover {
+  background-color: white;
+}
+
+.index-category:hover a {
+  color: #5E5266;
+  text-decoration: none;
+}
+
+.index-category a {
+  color: white;
+  font-size: 13px;
+  margin: 0 6px;
+  text-decoration: none;
+}
+
+.filter-buttons {
+  form {
+    border: none;
+  }
+  input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    & + label {
+      display: block;
+      line-height: 1;
+      color: #fff;
+      padding: 25px 35px;
+      text-decoration: none;
+      font-weight: 300;
+      font-size: 16px;
+      letter-spacing: 1px;
+      background-color: $blue;
+      &:hover, &:focus {
+          background-color: white;
+          color: #5E5266;
+      }
+      &:active {
+          border: 1px solid white;
+          color: white;
+      }
+    }
+    &:checked + label {
+      background-color: lightblue; //#252844;
+      color:  white;
+      &:hover, &:focus, &:active {
+        background-color: lightblue; //#252844;
+        color: white;
+      }
+    }
+  }
+}
+@media (max-width: 480px) {
+
+}
+
+.gen-wrapper {
+  display: inline-block;
+  height: 100%;
+  overflow-y: scroll;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+.gen-underline a {
+  text-decoration: none;
+}
+.sidebar {
+  height: 100%;
+}
