@@ -1,4 +1,32 @@
 <div class="gen-wrapper space-nav-ind">
-  <h1>Book Index Page</h1>
+  <!-- Filter Left -->
+  <div class="filter-buttons stud-width-left sidebar hidden-xs">
+    <form id="filters">
+    </form>
+  </div>
+  <!-- Books Right -->
+  <div class="container space-top-10">
+    <div class="row">
+      <div class="stud-content-right">
+        <% if @books.empty? %>
+          <div class="col-xs-12 col-sm-6">
+            <h1>Sorry, no results found</h1>
+          </div>
+        <% else %>
+          <% @books.each do |book| %>
+
+        <% end %>
+        <div class="col-xs-12 col-sm-4 col-m-4">
+          test1
+        </div>
+        <div class="col-xs-12 col-sm-4 col-m-4">
+          test2
+        </div>
+        <div class="col-xs-12 col-sm-4 col-m-4">
+          test3
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
