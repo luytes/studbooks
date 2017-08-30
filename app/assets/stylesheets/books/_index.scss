@@ -102,6 +102,22 @@
     }
   }
 }
+.stud-width-left {
+  background-color: $blue;
+  width: 10.625em;
+  margin-right: 0;
+  left: 0;
+  z-index: auto;
+  position: fixed;
+  max-height: 100%;
+  overflow-y: auto;
+}
+.stud-content-right {
+  margin-left: 10.625em;
+  position: relative;
+  height: 100%;
+}
+
 @media (max-width: 480px) {
 
 }
