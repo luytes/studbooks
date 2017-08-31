@@ -32,9 +32,9 @@ class User < ApplicationRecord
   private
 
   def send_welcome_email
-    if self.admin == false
+    # if self.admin == false
       UserMailer.welcome(self).deliver_now
-    end
+    # end
   end
 
   def confirmation_token

@@ -34,7 +34,7 @@ class UserMailer < ApplicationMailer
 
   def new_student_application_notice(application)
     @application = application
-    @student = @application.email
-    mail(to: @student, subject: "Thank you for your application #{@application.first_name}")
+    @user = @application.email
+    mail(to: @user, subject: "Thank you for your application #{@application.first_name}")
   end
 end
