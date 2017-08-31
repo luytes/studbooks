@@ -16,6 +16,8 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
 
+gem 'forty_facets'
+
 gem 'emoji'
 gem 'pundit'
 gem 'devise'
