@@ -14,17 +14,25 @@
           </div>
         <% else %>
           <% @books.each do |book| %>
-
+            <div class="col-xs-12 col-sm-6 col-md-4 space-top-20 selectable-card gen-underline">
+              <%= link_to book_path(book.id) do %>
+              <div class="index-card text-left">
+                <div class="bg-picture index-card-img" style="background-image: linear-gradient(-224deg, #08DBF0 0%, #033D68 100%)">
+                </div>
+                <div class="index-card-content no-margin">
+                  <h4 class="index-card-title no-margin"><%= book.title %></h4>
+                  <div class="index-card-description">
+                    <h5 class="no-margin"><%= cutoff_text(book.author) %></h5>
+                    <div class="index-card-student">
+                      <h5 class="no-margin">By <%= book.user.full_name %></h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            </div>
+          <% end %>
         <% end %>
-        <div class="col-xs-12 col-sm-4 col-m-4">
-          test1
-        </div>
-        <div class="col-xs-12 col-sm-4 col-m-4">
-          test2
-        </div>
-        <div class="col-xs-12 col-sm-4 col-m-4">
-          test3
-        </div>
       </div>
     </div>
   </div>
