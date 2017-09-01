@@ -10,6 +10,9 @@ class BooksController < ApplicationController
     # else
     #   @books = Book.where({title: params[:book][:title]}).uniq
     # end
+    @publish_year = @books.map { |p| p.publish_year }.uniq
+    @condition = @books.map { |c| c.condition }.uniq
+
   end
 
   def show
