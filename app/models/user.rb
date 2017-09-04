@@ -10,6 +10,7 @@ class User < ApplicationRecord
   mount_uploader :picture, PhotoUploader
 
   has_many :books
+  accepts_nested_attributes_for :books
 
   validates :email, uniqueness: true
   validates :first_name, presence: true
