@@ -3,16 +3,18 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   def index
-    @books = Book.all
-    # if params[:book][:title].present? && params[:user][:country].present? && params[:user][:university].present?
-    #   @books = Book.where({title: params[:book][:title]})
-    #   .joins(:user).where(user: {country: params[:user][:country].titleize}).uniq
-    # else
-    #   @books = Book.where({title: params[:book][:title]}).uniq
-    # end
+    if params[:book][:title].present? && params[:users][:university].present?
+      # @books = Book.where('title = ?', params[:book][:title]).joins(:user)
+      # .where(users: { university: params[:users][:university] }).uniq
+      @books = Book.where({title: params[:book][:title]})
+      .joins(:user).where(users: {university: params[:users][:university]}).uniq
+    elsif !params[:users][:university].present? && params[:books][:title].present?
+      @books = Book.where({title: params[:books][:title]}).uniq
+    elsif params[:users][:university].present? && !params[:books][:title].present?
+      @books = Book.where(users: {university: params[:user][:university].titleize}).uniq
+    end
     @publish_year = @books.map { |p| p.publish_year }.uniq
     @condition = @books.map { |c| c.condition }.uniq
-
   end
 
   def show

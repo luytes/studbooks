@@ -10,14 +10,14 @@
       </div>
       <div class="search-bar">
         <div class="form-inline aa-input-container invisible-search">
-          <%= simple_form_for [@book], url: books_path, method: :get do |f| %>
+          <%= simple_form_for [@books], url: books_path, method: :get do |f| %>
           <ul class="list-inline">
             <li><%= f.input :title, required: false, placeholder: "Title or Author", label: false %></li>
-            <%= simple_form_for [@user] do |r| %>
+            <%= simple_fields_for :users do |r| %>
               <li><%= r.input :university, required: false, placeholder: "University", label: false %></li>
             <% end %>
           </ul>
-            <%= f.button :submit, 'search',  class: "btn"  %>
+            <%= f.button :submit, 'search', class: "btn"  %>
           <% end %>
         </div>
       </div>

@@ -1,5 +1,6 @@
 class Book < ApplicationRecord
   belongs_to :user
+  accepts_nested_attributes_for :user
 
   # has_many :orders, :dependent => :destroy
   alias_attribute :owner, :user
