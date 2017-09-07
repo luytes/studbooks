@@ -2,24 +2,22 @@
    <div class="alert alert-info"><%= flash[:thanks] %></div>
  <% end %>
 <div class="container-fluid banner bg-picture" id="change_color" style="background-image: linear-gradient(-225deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.35) 50%), url('<%= asset_path('banner_logo.jpg') %>')">
-  <div class="row">
+  <div class="row search-bar">
     <div class="banner-content">
-      <div class="col-xs-12 col-sm-10 col-sm-offset-1 text-center">
+      <div class="col-xs-12 col-sm-12 col-m-12 text-center">
         <h1>Studbooks</h1>
         <h2>From students for students</h2>
       </div>
       <div class="search-bar">
-        <div class="form-inline aa-input-container invisible-search">
-          <%= simple_form_for [@books], url: books_path, method: :get do |f| %>
-          <ul class="list-inline">
-            <li><%= f.input :title, required: false, placeholder: "Title or Author", label: false %></li>
+        <%= simple_form_for [@books], url: books_path, method: :get do |f| %>
+          <div class="col-xs-12 col-s-4 col-sm-4"><%= f.input :title, required: false, placeholder: "Title or Author", label: false %></div>
+          <div class="col-xs-12 col-s-4 col-sm-4">
             <%= simple_fields_for :users do |r| %>
-              <li><%= r.input :university, required: false, placeholder: "University", label: false %></li>
+              <%= r.input :university, required: false, placeholder: "University", label: false %>
             <% end %>
-          </ul>
-            <%= f.button :submit, 'search', class: "btn"  %>
-          <% end %>
-        </div>
+          </div>
+          <div class="col-xs-12 col-s-4 col-sm-4"><%= f.button :submit, 'search', class: "btn" %></div>
+        <% end %>
       </div>
     </div>
   </div>
