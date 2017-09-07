@@ -9,7 +9,7 @@ password = Faker::Internet.password(8)
 FIELD = ["Math", "Chemistry", "Engineering", "Science"]
 GENDER = ["men", "women"]
 NUMBER = (0..99)
-UNIVERSITY = ["ETH", "Universiy of Berlin"]
+UNIVERSITY = ["ETH", "University of Berlin"]
 COUNTRY = ["Germany", "Afghanistan", "England", "China", "Japan"]
 
 # SEEDING USERS
