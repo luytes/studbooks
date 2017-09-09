@@ -45,6 +45,7 @@
                   <h4 class="index-card-title no-margin"><%= book.title %></h4>
                   <div class="index-card-description">
                     <h5 class="no-margin"><%= cutoff_text(book.author) %></h5>
+                    <h5 class="no-margin">By <%= book.user.university %></h5>
                     <div class="index-card-student">
                       <h5 class="no-margin">By <%= book.user.full_name %></h5>
                     </div>

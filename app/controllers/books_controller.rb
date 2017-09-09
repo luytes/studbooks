@@ -8,10 +8,12 @@ class BooksController < ApplicationController
       # .where(users: { university: params[:users][:university] }).uniq
       @books = Book.where({title: params[:book][:title]})
       .joins(:user).where(users: {university: params[:users][:university]}).uniq
-    elsif !params[:users][:university].present? && params[:books][:title].present?
+    elsif params[:users].nil? && params[:books][:title].present?
       @books = Book.where({title: params[:books][:title]}).uniq
-    elsif params[:users][:university].present? && !params[:books][:title].present?
-      @books = Book.where(users: {university: params[:user][:university].titleize}).uniq
+    elsif params[:users][:university].present? && params[:books].nil?
+      @books = Book.joins(:user).where(users: {university: params[:users][:university]}).uniq
+    else
+      @books = Book.all
     end
     @publish_year = @books.map { |p| p.publish_year }.uniq
     @condition = @books.map { |c| c.condition }.uniq
