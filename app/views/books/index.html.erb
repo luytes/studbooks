@@ -3,7 +3,7 @@
   <div class="filter-buttons stud-width-left leftnav hidden-xs">
     <div class="leftnav-container">
       <!-- Year Filter -->
-      <h5>Publish Year</h5>
+      <h5>Publish Year <div class="filter-show-icon"><i class="fa fa-sort-desc" aria-hidden="true"></i></div></h5>
       <form id="year-filters">
         <% @publish_year.each do |publish| %>
           <div class="category-list">
@@ -15,7 +15,7 @@
         <% end %>
       </form>
       <!-- Condition Filter -->
-      <h5>Condition</h5>
+      <h5>Condition <div class="filter-show-icon"><i class="fa fa-sort-desc" aria-hidden="true"></i></div></h5>
       <form id="condition-filters">
         <% @condition.each do |cond| %>
           <div class="category-list">
