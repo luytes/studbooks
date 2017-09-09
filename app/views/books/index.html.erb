@@ -1,30 +1,32 @@
 <div class="gen-wrapper space-nav-ind">
   <!-- Filter Left -->
-  <div class="filter-buttons stud-width-left sidebar hidden-xs">
-    <!-- Year Filter -->
-    <p>Publish Year</p>
-    <form id="year-filters">
-      <% @publish_year.each do |publish| %>
-        <div class="category-list">
-          <input type="checkbox" name='<%= publish %>' id='<%= publish %>'>
-          <label class="index-year" for='<%= publish %>'>
-          <%= publish %>
-          </label>
-        </div>
-      <% end %>
-    </form>
-    <!-- Condition Filter -->
-    <p>Condition</p>
-    <form id="condition-filters">
-      <% @condition.each do |cond| %>
-        <div class="category-list">
-          <input type="checkbox" name='<%= cond %>' id='<%= cond %>'>
-          <label class="index-year" for='<%= cond %>'>
-          <%= cond %>
-          </label>
-        </div>
-      <% end %>
-    </form>
+  <div class="filter-buttons stud-width-left leftnav hidden-xs">
+    <div class="leftnav-container">
+      <!-- Year Filter -->
+      <h5>Publish Year</h5>
+      <form id="year-filters">
+        <% @publish_year.each do |publish| %>
+          <div class="category-list">
+            <input type="checkbox" name='<%= publish %>' id='<%= publish %>'>
+            <label class="index-year" for='<%= publish %>'>
+            - <%= publish %>
+            </label>
+          </div>
+        <% end %>
+      </form>
+      <!-- Condition Filter -->
+      <h5>Condition</h5>
+      <form id="condition-filters">
+        <% @condition.each do |cond| %>
+          <div class="category-list">
+            <input type="checkbox" name='<%= cond %>' id='<%= cond %>'>
+            <label class="index-year" for='<%= cond %>'>
+            - <%= cond %>
+            </label>
+          </div>
+        <% end %>
+      </form>
+    </div>
   </div>
   <!-- Books Right -->
   <div class="container space-top-10">
