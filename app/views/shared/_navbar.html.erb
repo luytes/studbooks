@@ -34,8 +34,14 @@
       </div>
 
     <% else %>
-
+      <!-- Login and Signup Button -->
        <div class="navbar-item">
+        <ul class="list-inline no-marg-bot navigation">
+          <li class="space-right"><%= link_to t(".sign_up", default: "Sign Up"), new_user_registration_path %></li>
+          <li class="space-right"><%= link_to t(".sign_in", default: "Login"), new_user_session_path %></li>
+        </ul>
+      </div>
+<!--        <div class="navbar-item">
         <div class="dropdown">
           <p class="dropdown-toggle no-margin-bot navbar-button text-center" data-toggle="dropdown">Placeholder</p>
           <ul class="dropdown-menu dropdown-menu-right navbar-dropdown-menu">
@@ -43,7 +49,7 @@
             <li><%= link_to t(".sign_in", default: "Login"), new_user_session_path %></li>
           </ul>
         </div>
-      </div>
+      </div> -->
 
     <% end %>
   </div>
