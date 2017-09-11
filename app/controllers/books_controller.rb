@@ -7,11 +7,13 @@ class BooksController < ApplicationController
       # @books = Book.where('title = ?', params[:book][:title]).joins(:user)
       # .where(users: { university: params[:users][:university] }).uniq
       @books = Book.where({title: params[:book][:title]})
-      .joins(:user).where(users: {university: params[:users][:university]}).uniq
-    elsif !params[:users][:university].present? && params[:books][:title].present?
-      @books = Book.where({title: params[:books][:title]}).uniq
-    elsif params[:users][:university].present? && !params[:books][:title].present?
-      @books = Book.where(users: {university: params[:user][:university].titleize}).uniq
+      .joins(:user).where(users: {university: params[:users][:university]})
+    elsif !params[:users][:university].present? && params[:book][:title].present?
+      @books = Book.where({title: params[:book][:title]})
+    elsif params[:users][:university].present? && !params[:book][:title].present?
+      @books = Book.joins(:user).where(users: {university: params[:users][:university]})
+    else
+      @books = Book.all
     end
     @publish_year = @books.map { |p| p.publish_year }.uniq
     @condition = @books.map { |c| c.condition }.uniq
