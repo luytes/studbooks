@@ -108,7 +108,20 @@
     top: -17px;
     left: 3px;
     position: absolute;
+    transition: 0.3s all ease-in-out;
   }
+}
+.header-click {
+  cursor: pointer;
+}
+.header-click:hover {
+  .fa {color: red;}
+}
+.test {
+  display: none;
+}
+.header-box {
+  margin-bottom: 15px;
 }
 .stud-width-left {
   background-color: white;

@@ -3,29 +3,37 @@
   <div class="filter-buttons stud-width-left leftnav hidden-xs">
     <div class="leftnav-container">
       <!-- Year Filter -->
-      <h5>Publish Year <div class="filter-show-icon"><i class="fa fa-sort-desc" aria-hidden="true"></i></div></h5>
-      <form id="year-filters">
-        <% @publish_year.each do |publish| %>
-          <div class="category-list">
-            <input type="checkbox" name='<%= publish %>' id='<%= publish %>'>
-            <label class="index-year" for='<%= publish %>'>
-            - <%= publish %>
-            </label>
-          </div>
-        <% end %>
-      </form>
+      <div class="header-box">
+        <div class="header-click">
+          <h5>Publish Year <div class="filter-show-icon"><i class="fa fa-sort-desc" aria-hidden="true"></i></div></h5>
+        </div>
+        <form id="year-filters" class="test">
+          <% @publish_year.each do |publish| %>
+            <div class="category-list">
+              <input type="checkbox" name='<%= publish %>' id='<%= publish %>'>
+              <label class="index-year" for='<%= publish %>'>
+              - <%= publish %>
+              </label>
+            </div>
+          <% end %>
+        </form>
+      </div>
       <!-- Condition Filter -->
-      <h5>Condition <div class="filter-show-icon"><i class="fa fa-sort-desc" aria-hidden="true"></i></div></h5>
-      <form id="condition-filters">
-        <% @condition.each do |cond| %>
-          <div class="category-list">
-            <input type="checkbox" name='<%= cond %>' id='<%= cond %>'>
-            <label class="index-year" for='<%= cond %>'>
-            - <%= cond %>
-            </label>
-          </div>
-        <% end %>
-      </form>
+      <div class="header-box">
+        <div class="header-click">
+          <h5>Condition <div class="filter-show-icon"><i class="fa fa-sort-desc" aria-hidden="true"></i></div></h5>
+        </div>
+        <form id="condition-filters" class="test">
+          <% @condition.each do |cond| %>
+            <div class="category-list">
+              <input type="checkbox" name='<%= cond %>' id='<%= cond %>'>
+              <label class="index-year" for='<%= cond %>'>
+              - <%= cond %>
+              </label>
+            </div>
+          <% end %>
+        </form>
+      </div>
     </div>
   </div>
   <!-- Books Right -->
@@ -86,6 +94,12 @@
         });
         if (selectedCategoryNames.length === 0) cards.show();
       });
+    });
+    // SlideUp Choice
+    $('.header-click').on('click', function() {
+      $parent_filter = $(this).closest('.header-box');
+      $parent_filter.siblings().find('.test').slideUp();
+      $parent_filter.find('.test').slideToggle(500, 'swing');
     });
   </script>
 
