@@ -1,7 +1,40 @@
 .book-show-page {
+  margin-top: 22px;
   .container-fluid {
     margin-left: 18px;
     margin-right: 18px;
   }
 }
-
+.book-image {
+  height: 300px;
+  width: 100%;
+}
+table:last-child {
+  margin-bottom: 0!important;
+}
+table.price-line-item td {
+  padding-right: 5px;
+}
+.book-price-highlight {
+  font-size: 17px!important;
+  line-height: 1.255!important;
+  color: #B12704!important;
+}
+.book-features {
+  margin-top: 10px;
+  margin-bottom: 18px;
+  color: #949494;
+  font-size: 13px;
+  line-height: 1.9;
+  .book-feature-item {
+    color: #111;
+  }
+}
+.book-message {
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  margin-top: 22px;
+}
+.book-message-inner {
+  padding: 14px 18px;
+}

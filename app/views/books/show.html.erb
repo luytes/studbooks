@@ -2,14 +2,42 @@
   <div class="book-show-page">
     <div class="container-fluid">
       <div class="row">
+        <!-- Book Image -->
         <div class="col-xs-12 col-s-12 col-sm-4 col-m-4">
-          <div class="testing"></div>
+          <div class="book-image bg-picture" style="background-image: url( <%= @book.picture %>);">
+          </div>
         </div>
+        <!-- Book Information -->
         <div class="col-xs-12 col-s-12 col-sm-5 col-m-5">
-          <div class="testing"></div>
+          <div class="book-info">
+            <h2><%= @book.title %></h2>
+            <p>from <%= @book.author %></p>
+            <p>sold by <%= @book.user.full_name %></p>
+            <hr>
+            <table class="price-line-item">
+              <tbody>
+                <tr>
+                  <td id="priceblock">Price: </td>
+                  <td><span class="book-price-highlight"> €<%= @book.price %></span></td>
+                </tr>
+              </tbody>
+            </table>
+            <ul class="book-features">
+              <li><span class="book-feature-item"><%= @book.condition %></span></li>
+              <li><span class="book-feature-item">Published in <%= @book.publish_year %></span></li>
+            </ul>
+          </div>
         </div>
         <div class="col-xs-12 col-s-12 col-sm-3 col-m-3">
-          <div class="testing"></div>
+          <div class="book-message text-center">
+            <div class="book-message-inner">
+              <div class="book-message-box">
+                <div class="btn btn-primary">Send a message</div>
+                <hr>
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
