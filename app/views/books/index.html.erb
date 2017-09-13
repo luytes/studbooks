@@ -7,7 +7,7 @@
         <div class="header-click">
           <h5>Publish Year <div class="filter-show-icon"><i class="fa fa-sort-desc" aria-hidden="true"></i></div></h5>
         </div>
-        <form id="year-filters" class="test">
+        <form id="year-filters" class="no-display">
           <% @publish_year.each do |publish| %>
             <div class="category-list">
               <input type="checkbox" name='<%= publish %>' id='<%= publish %>'>
@@ -23,7 +23,7 @@
         <div class="header-click">
           <h5>Condition <div class="filter-show-icon"><i class="fa fa-sort-desc" aria-hidden="true"></i></div></h5>
         </div>
-        <form id="condition-filters" class="test">
+        <form id="condition-filters" class="no-display">
           <% @condition.each do |cond| %>
             <div class="category-list">
               <input type="checkbox" name='<%= cond %>' id='<%= cond %>'>
@@ -98,8 +98,8 @@
     // SlideUp Choice
     $('.header-click').on('click', function() {
       $parent_filter = $(this).closest('.header-box');
-      $parent_filter.siblings().find('.test').slideUp();
-      $parent_filter.find('.test').slideToggle(500, 'swing');
+      // $parent_filter.siblings().find('.no-display').slideUp();
+      $parent_filter.find('.no-display').slideToggle(500, 'swing');
     });
   </script>
 
