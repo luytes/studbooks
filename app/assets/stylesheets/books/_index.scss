@@ -1,5 +1,22 @@
 @import "show";
-
+.searchTemplate {
+  padding: 0 10px;
+}
+.result-info {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 0 10px #ddd;
+  -webkit-box-shadow: 0 0 10px #ddd;
+  -moz-box-shadow: 0 0 10px #ddd;
+}
+.numberResult {
+  margin-left: 20px;
+  h5 {
+    font-size: 14px;
+    line-height: 19px;
+    font-weight: 400;
+  }
+}
 .index-card {
   background-color: white;
   box-shadow: 1px;
