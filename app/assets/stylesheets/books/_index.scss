@@ -1,5 +1,34 @@
 @import "show";
-
+.searchTemplate {
+  padding: 0 10px;
+}
+.result-info {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 0 10px #ddd;
+  -webkit-box-shadow: 0 0 10px #ddd;
+  -moz-box-shadow: 0 0 10px #ddd;
+}
+.numberResult {
+  margin-left: 20px;
+}
+.search-content {
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 400;
+}
+.result-info-content {
+  width: 100%;
+}
+.fl-left {
+  min-height: 1px;
+  overflow: visible;
+}
+.fl-right {
+  margin-right: 0;
+  float: right;
+  text-align: right;
+}
 .index-card {
   background-color: white;
   box-shadow: 1px;

@@ -1,4 +1,37 @@
 <div class="gen-wrapper space-nav-ind">
+<div class="searchTemplate">
+  <div class="margin-neg-10">
+    <div class="result-info margin-bot-15">
+      <div class="result-info-content row">
+        <div class="fl-left col-xs-8">
+          <div class="numberResult">
+            <h5 class="search-content">
+              <%= @books.count %> results
+              <% if params[:book][:title].present? %>
+                for <%= params[:book][:title] %>
+              <% end %>
+              <% if params[:users][:university].present? %>
+                at <%= params[:users][:university] %>
+              <% end %>
+            </h5>
+          </div>
+        </div>
+        <div class="fl-right col-xs-4">
+          <div class="sortBy">
+            <h5 class="search-content">
+              Sort by
+              <select name="post[person_id]">
+                <option value="1" selected="selected">Best Results</option>
+                <option value="2">Price Descending</option>
+                <option value="3">Price Ascending</option>
+              </select>
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
   <!-- Filter Left -->
   <div class="filter-buttons stud-width-left leftnav hidden-xs">
     <div class="leftnav-container">
@@ -49,13 +82,13 @@
             <div class="col-xs-12 col-sm-6 col-md-4 space-top-20 selectable-card gen-underline" data-category="<%=book.publish_year%>">
               <%= link_to book_path(book.id) do %>
               <div class="index-card text-left">
-                <div class="bg-picture index-card-img" style="background-image: linear-gradient(-224deg, #08DBF0 0%, #033D68 100%)">
+                <div class="bg-picture index-card-img" style="background-image: url(<%= book.picture %>);">
                 </div>
                 <div class="index-card-content no-margin">
                   <h4 class="index-card-title no-margin"><%= book.title %></h4>
                   <div class="index-card-description">
                     <h5 class="no-margin"><%= cutoff_text(book.author) %></h5>
-                    <h5 class="no-margin">By <%= book.user.university %></h5>
+                    <h5 class="no-margin book-price-highlight"><%= book.price %>€</h5>
                     <div class="index-card-student">
                       <h5 class="no-margin">By <%= book.user.full_name %></h5>
                     </div>
@@ -83,9 +116,6 @@
         cards = $('.selectable-card');
         cards.hide()
         cards.each(function() {
-        //   if (selectedCategoryNames.includes($(this).attr('data-category'))) $(this).show()
-        // });
-
         // if you want fade in do
         // ...each(function(index) {
         //     $(this).delay(100*index).fadeIn(300);
