@@ -2,20 +2,31 @@
 <div class="searchTemplate">
   <div class="margin-neg-10">
     <div class="result-info margin-bot-15">
-      <div class="result-info-content">
-        <div class="numberResult">
-          <h5>
-            <%= @books.count %> results
-            <% if params[:book][:title].present? %>
-              for <%= params[:book][:title] %>
-            <% end %>
-            <% if params[:users][:university].present? %>
-              at <%= params[:users][:university] %>
-            <% end %>
-          </h5>
+      <div class="result-info-content row">
+        <div class="fl-left col-xs-8">
+          <div class="numberResult">
+            <h5 class="search-content">
+              <%= @books.count %> results
+              <% if params[:book][:title].present? %>
+                for <%= params[:book][:title] %>
+              <% end %>
+              <% if params[:users][:university].present? %>
+                at <%= params[:users][:university] %>
+              <% end %>
+            </h5>
+          </div>
         </div>
-        <div class="sortBy">
-
+        <div class="fl-right col-xs-4">
+          <div class="sortBy">
+            <h5 class="search-content">
+              Sort by
+              <select name="post[person_id]">
+                <option value="1" selected="selected">Best Results</option>
+                <option value="2">Price Descending</option>
+                <option value="3">Price Ascending</option>
+              </select>
+            </h5>
+          </div>
         </div>
       </div>
     </div>
@@ -105,9 +116,6 @@
         cards = $('.selectable-card');
         cards.hide()
         cards.each(function() {
-        //   if (selectedCategoryNames.includes($(this).attr('data-category'))) $(this).show()
-        // });
-
         // if you want fade in do
         // ...each(function(index) {
         //     $(this).delay(100*index).fadeIn(300);
