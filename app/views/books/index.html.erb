@@ -7,11 +7,16 @@
           <div class="numberResult">
             <h5 class="search-content">
               <%= @books.count %> results
-              <% if params[:book][:title].present? %>
-                for <%= params[:book][:title] %>
+              <!-- Using the dig method -->
+              <!-- <#% if params[:book][:title].present? %> -->
+              <% if params.dig("book", "title").nil? %>
+                <!-- for <#%= params[:book][:title] %> -->
+                for <%= params.dig("book", "title") %>
               <% end %>
-              <% if params[:users][:university].present? %>
-                at <%= params[:users][:university] %>
+              <!-- <#% if params[:users][:university].present? %> -->
+              <% if params.dig("users", "university").nil? %>
+                <!-- at <#%= params[:users][:university] %> -->
+                at <%= params.dig("users", "university") %>
               <% end %>
             </h5>
           </div>
@@ -20,12 +25,14 @@
           <div class="sortBy">
             <h5 class="search-content">
               Sort by
-              <select name="post[person_id]">
-                <option value="1" selected="selected">Best Results</option>
-                <option value="2">Price Descending</option>
-                <option value="3">Price Ascending</option>
+              <!-- <select id="priceSelect" onchange="priceFunction()"> -->
+              <select id="priceSelect">
+                <option value="Best Results" selected="selected">Best Results</option>
+                <option value="Price Descending">Price Descending</option>
+                <option value="Price Ascending">Price Ascending</option>
               </select>
             </h5>
+            <p id="bookDisplayPrice"></p>
           </div>
         </div>
       </div>
@@ -108,7 +115,7 @@
 
   <script>
     $(document).ready(function() {
-      $('#year-filters input:checkbox').change(function () {
+      $('#year-filters input:checkbox').change(function() {
         $('#year-filters input:checkbox').not(this).prop('checked', false);
         var selectedCategoryNames = $('#year-filters input:checkbox:checked').map(function () {
           return $(this).attr('name')
@@ -125,12 +132,38 @@
         if (selectedCategoryNames.length === 0) cards.show();
       });
     });
+
     // SlideUp Choice
     $('.header-click').on('click', function() {
       $parent_filter = $(this).closest('.header-box');
       // $parent_filter.siblings().find('.no-display').slideUp();
       $parent_filter.find('.no-display').slideToggle(500, 'swing');
     });
-  </script>
 
+    // function priceFunction() {
+    //   var priceVar = document.getElementById("priceSelect").value;
+    //   document.getElementById("bookDisplayPrice").innerHTML = "You selected: " + priceVar;
+    // }
+    //   var selectPrice = $('#priceSelect :selected').val();
+    //   var cards = $('.selectable-card');
+    // });
+    $('#priceSelect').change(function(){
+      // var ks = $.ajax({
+      $.ajax({
+        url: "books",
+        type: "GET",
+        // pass a parameter with data like
+        data: {sort: $('#priceSelect :selected').val()},
+        success:function(result){
+            console.log(result);
+            alert("it is sent");
+          },
+        error: function (xhr, ajaxOptions, thrownError) {
+          alert(xhr.status);
+          alert(thrownError);
+        }
+      })
+      // console.log(ks);
+    });
+  </script>
 <% end %>
