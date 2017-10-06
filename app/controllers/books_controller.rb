@@ -41,7 +41,6 @@ class BooksController < ApplicationController
     else
       @books = Book.all
     end
-
     case params[:sort]
       when "Price Descending"
         if (params[:title] != "" ) && (params[:university] != "" )
@@ -54,6 +53,7 @@ class BooksController < ApplicationController
         else
           @books = Book.all.order(price_cents: "DESC")
         end
+        @books = @books.includes(:user)
       when "Price Ascending"
         if (params[:title] != "" ) && (params[:university] != "" )
           @books = Book.where({title: params[:title]})
@@ -65,6 +65,7 @@ class BooksController < ApplicationController
         else
           @books = Book.all.order(price_cents: "ASC")
         end
+        @books = @books.includes(:user)
       when "Best Results"
         if (params[:title] != "" ) && (params[:university] != "" )
           @books = Book.where({title: params[:title]})
@@ -77,13 +78,15 @@ class BooksController < ApplicationController
           @books = Book.all.sort_by(&:created_at)
         end
     end
+
     @publish_year = @books.map { |p| p.publish_year }.uniq
     @condition = @books.map { |c| c.condition }.uniq
+    # @user = @books.map { |u| u.user }.uniq
+
     respond_to do |format|
       format.html
-      format.json { render json: @books }
+      format.json #{ render json: {books: @books, users: @user} }
     end
-    # render json: {data: @books}
   end
 
   def show

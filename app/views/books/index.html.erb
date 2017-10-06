@@ -117,6 +117,10 @@
 <% end %>
 <%= content_tag :div, class: "university_information", data: {university: @university} do %>
 <% end %>
+<%= content_tag :div, class: "user_information", data: {user: @user} do %>
+<!-- gives me an array of objects with user -->
+<% end %>
+
 <%= content_for(:after_js) do %>
 
   <script>
@@ -146,23 +150,16 @@
       $parent_filter.find('.no-display').slideToggle(500, 'swing');
     });
 
-    // function priceFunction() {
-    //   var priceVar = document.getElementById("priceSelect").value;
-    //   document.getElementById("bookDisplayPrice").innerHTML = "You selected: " + priceVar;
-    // }
-    //   var selectPrice = $('#priceSelect :selected').val();
-    //   var cards = $('.selectable-card');
-    // });
     $('#priceSelect').change(function(){
       $.ajax({
         url: "books",
         type: "GET",
         dataType: 'json',
-        // pass a parameter with data like -- 'sort' is the parameter that is given to the controller
         data: {
           sort: $('#priceSelect :selected').val(),
           title: $('.title_information').data('title'),
-          university: $('.university_information').data('university')
+          university: $('.university_information').data('university'),
+          // user: $('.user_information').data('user') // Ajax does not like '_'
         },
         success: function(result){
           console.log(result);
@@ -173,10 +170,12 @@
           // var parsed = data;
 
           // var books = JSON.parse(result);
+
+          // var books = result.books;
+          // var users = result.users;
           var books = result;
           var length = books.length;
           var html = "";
-          var cutoff = <%= @injections.to_json %>;
           for (var i = 0; i < length; i++) {
             html += "<div class='col-xs-12 col-sm-6 col-md-4 space-top-20 selectable-card gen-underline' data-category='" + books[i].publish_year + "'>";
             html += "<a href='/books/" + books[i].id + "'>" ;
@@ -186,11 +185,10 @@
             html += "<div class='index-card-content no-margin'>";
             html += "<h4 class='index-card-title no-margin'>" + books[i].title + "</h4>";
             html += "<div class='index-card-description'>";
-            html += "<h5 class='no-margin'>" + "<%= cutoff_text(" + books[i].author + ") %></h5>";
-            html += "<h5 class='no-margin book-price-highlight'>" + books[i].price + "€</h5>";
+            html += "<h5 class='no-margin'>" + books[i].author + "</h5>";
+            html += "<h5 class='no-margin book-price-highlight'>" + (books[i].price.fractional/100) + "€</h5>";
             html += "<div class='index-card-student'>";
-            console.log(books[i].user_id.first_name)
-            // html += "<h5 class='no-margin'>By " + books[i].user.first_name + books[i].user.last_name + "</h5>";
+            html += "<h5 class='no-margin'>By " + books[i].user_fullname + "</h5>";
             html += "</div>";
             html += "</div>";
             html += "</div>";
@@ -198,7 +196,6 @@
             html += "</a>";
             html += "</div>";
           }
-          // $('.books-cards').innerHTML = html
           document.getElementById("book-id").innerHTML = html
         },
         error: function (xhr, ajaxOptions, thrownError) {
