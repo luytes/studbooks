@@ -40,7 +40,7 @@ Book.create!(
     owner: User.all.sample,
     condition: 'bad',
     price: 10,
-    publish_year: "April 24th, 2007",
+    publish_year: "2007",
   )
 
 Book.create!(
@@ -51,7 +51,7 @@ Book.create!(
     owner: User.all.sample,
     condition: 'like new',
     price: 22,
-    publish_year: "April 25th, 2007",
+    publish_year: "2007",
   )
 
 Book.create!(
@@ -62,7 +62,7 @@ Book.create!(
     owner: User.all.sample,
     condition: 'ok',
     price: 5,
-    publish_year: "April 26th, 2007",
+    publish_year: "2008",
   )
 
 Book.create!(
@@ -73,7 +73,7 @@ Book.create!(
     owner: User.all.sample,
     condition: 'good',
     price: 26,
-    publish_year: "April 28th, 2007",
+    publish_year: "2009",
   )
 
 
@@ -85,7 +85,7 @@ Book.create!(
     owner: User.all.sample,
     condition: 'used',
     price: 12,
-    publish_year: "April 25th, 2016",
+    publish_year: "2016",
   )
 
 Book.create(
@@ -96,7 +96,7 @@ Book.create(
     owner: User.all.sample,
     condition: 'good',
     price: 8,
-    publish_year: "April 25th, 2007",
+    publish_year: "2017",
   )
 
 puts 'Finished!'
