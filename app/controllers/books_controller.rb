@@ -1,22 +1,92 @@
 class BooksController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show, :sortable]
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:book][:title].present? && params[:users][:university].present?
-      # @books = Book.where('title = ?', params[:book][:title]).joins(:user)
-      # .where(users: { university: params[:users][:university] }).uniq
-      @books = Book.where({title: params[:book][:title]})
-      .joins(:user).where(users: {university: params[:users][:university]})
-    elsif !params[:users][:university].present? && params[:book][:title].present?
-      @books = Book.where({title: params[:book][:title]})
-    elsif params[:users][:university].present? && !params[:book][:title].present?
-      @books = Book.joins(:user).where(users: {university: params[:users][:university]})
+    @title = params.dig("book", "title")
+    @university = params.dig("users", "university")
+    # Using present? method
+    # if params[:book][:title].present? && params[:users][:university].present?
+    #   @books = Book.where({title: params[:book][:title]})
+    #   .joins(:user).where(users: {university: params[:users][:university]})
+    # elsif !params[:users][:university].present? && params[:book][:title].present?
+    #   @books = Book.where({title: params[:book][:title]})
+    # elsif params[:users][:university].present? && !params[:book][:title].present?
+    #   @books = Book.joins(:user).where(users: {university: params[:users][:university]})
+    # else
+    #   @books = Book.all
+    # end
+
+    # Using the DIG method
+    # The dig method won't look further if a key is nil, which avoids this kind of error.
+    # if params.dig("book", "title").nil? && params.dig("users", "university").nil?
+    #   @books = Book.where({title: params.dig("book", "title")})
+    #   .joins(:user).where(users: {university: params.dig("users", "university")})
+    # elsif !params.dig("book", "title").nil? && params.dig("users", "university").nil?
+    #   @books = Book.where({title: params.dig("book", "title")})
+    # elsif params.dig("book", "title").nil? && !params.dig("users", "university").nil?
+    #   @books = Book.joins(:user).where(users: {university: params.dig("users", "university")})
+    # else
+    #   @books = Book.all
+    # end
+
+    # Using the == "" method
+    if (params.dig("book", "title") != "" ) && (params.dig("users", "university") != "" )
+      @books = Book.where({title: params.dig("book", "title")})
+      .joins(:user).where(users: {university: params.dig("users", "university")})
+    elsif (params.dig("book", "title") != "" ) && (params.dig("users", "university") == "" )
+      @books = Book.where({title: params.dig("book", "title")})
+    elsif (params.dig("book", "title") == "" ) && (params.dig("users", "university") != "" )
+      @books = Book.joins(:user).where(users: {university: params.dig("users", "university")})
     else
       @books = Book.all
     end
+    case params[:sort]
+      when "Price Descending"
+        if (params[:title] != "" ) && (params[:university] != "" )
+          @books = Book.where({title: params[:title]})
+          .joins(:user).where(users: {university: params[:university]}).order(price_cents: "DESC")
+        elsif (params[:title] != "" ) && (params[:university] == "" )
+          @books = Book.where({title: params[:title]}).order(price_cents: "DESC")
+        elsif (params[:title] == "" ) && (params[:university] != "" )
+          @books = Book.joins(:user).where(users: {university: params[:university]}).order(price_cents: "DESC")
+        else
+          @books = Book.all.order(price_cents: "DESC")
+        end
+        @books = @books.includes(:user)
+      when "Price Ascending"
+        if (params[:title] != "" ) && (params[:university] != "" )
+          @books = Book.where({title: params[:title]})
+          .joins(:user).where(users: {university: params[:university]}).order(price_cents: "ASC")
+        elsif (params[:title] != "" ) && (params[:university] == "" )
+          @books = Book.where({title: params[:title]}).order(price_cents: "ASC")
+        elsif (params[:title] == "" ) && (params[:university] != "" )
+          @books = Book.joins(:user).where(users: {university: params[:university]}).order(price_cents: "ASC")
+        else
+          @books = Book.all.order(price_cents: "ASC")
+        end
+        @books = @books.includes(:user)
+      when "Best Results"
+        if (params[:title] != "" ) && (params[:university] != "" )
+          @books = Book.where({title: params[:title]})
+          .joins(:user).where(users: {university: params[:university]}).sort_by(&:created_at)
+        elsif (params[:title] != "" ) && (params[:university] == "" )
+          @books = Book.where({title: params[:title]}).sort_by(&:created_at)
+        elsif (params[:title] == "" ) && (params[:university] != "" )
+          @books = Book.joins(:user).where(users: {university: params[:university]}).sort_by(&:created_at)
+        else
+          @books = Book.all.sort_by(&:created_at)
+        end
+    end
+
     @publish_year = @books.map { |p| p.publish_year }.uniq
     @condition = @books.map { |c| c.condition }.uniq
+    # @user = @books.map { |u| u.user }.uniq
+
+    respond_to do |format|
+      format.html
+      format.json #{ render json: {books: @books, users: @user} }
+    end
   end
 
   def show
@@ -70,4 +140,21 @@ class BooksController < ApplicationController
                                  :iban, :publish_year, :picture, :price_cents,
                                  :price_currency, :condition, :state)
   end
+
+  def sort_order
+    params[:sort] == "Price Descending" ? "desc" : "asc"
+  end
+
+  def sortable
+    sort = params[:sort]
+    case sort
+      when "Best Results"
+        @books = @books.price_cents.sort_by(&:created_at)
+      when "Price Descending"
+        @books = @books.order(price_cents: :desc)
+      when "Price Ascending"
+        @books = @books.order(price_cents: :asc)
+    end
+  end
+
 end

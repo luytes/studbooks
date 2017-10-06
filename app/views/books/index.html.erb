@@ -1,37 +1,44 @@
 <div class="gen-wrapper space-nav-ind">
-<div class="searchTemplate">
-  <div class="margin-neg-10">
-    <div class="result-info margin-bot-15">
-      <div class="result-info-content row">
-        <div class="fl-left col-xs-8">
-          <div class="numberResult">
-            <h5 class="search-content">
-              <%= @books.count %> results
-              <% if params[:book][:title].present? %>
-                for <%= params[:book][:title] %>
-              <% end %>
-              <% if params[:users][:university].present? %>
-                at <%= params[:users][:university] %>
-              <% end %>
-            </h5>
+  <div class="searchTemplate">
+    <div class="margin-neg-10">
+      <div class="result-info margin-bot-15">
+        <div class="result-info-content row">
+          <div class="fl-left col-xs-8">
+            <div class="numberResult">
+              <h5 class="search-content">
+                <%= @books.count %> results
+                <!-- Using the dig method -->
+                <!-- <#% if params[:book][:title].present? %> -->
+                <% if params.dig("book", "title").nil? %>
+                  <!-- for <#%= params[:book][:title] %> -->
+                  for <%= params.dig("book", "title") %>
+                <% end %>
+                <!-- <#% if params[:users][:university].present? %> -->
+                <% if params.dig("users", "university").nil? %>
+                  <!-- at <#%= params[:users][:university] %> -->
+                  at <%= params.dig("users", "university") %>
+                <% end %>
+              </h5>
+            </div>
           </div>
-        </div>
-        <div class="fl-right col-xs-4">
-          <div class="sortBy">
-            <h5 class="search-content">
-              Sort by
-              <select name="post[person_id]">
-                <option value="1" selected="selected">Best Results</option>
-                <option value="2">Price Descending</option>
-                <option value="3">Price Ascending</option>
-              </select>
-            </h5>
+          <div class="fl-right col-xs-4">
+            <div class="sortBy">
+              <h5 class="search-content">
+                Sort by
+                <!-- <select id="priceSelect" onchange="priceFunction()"> -->
+                <select id="priceSelect">
+                  <option value="Best Results" selected="selected">Best Results</option>
+                  <option value="Price Descending">Price Descending</option>
+                  <option value="Price Ascending">Price Ascending</option>
+                </select>
+              </h5>
+              <p id="bookDisplayPrice"></p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
   <!-- Filter Left -->
   <div class="filter-buttons stud-width-left leftnav hidden-xs">
     <div class="leftnav-container">
@@ -78,37 +85,47 @@
             <h1>Sorry, no results found</h1>
           </div>
         <% else %>
-          <% @books.each do |book| %>
-            <div class="col-xs-12 col-sm-6 col-md-4 space-top-20 selectable-card gen-underline" data-category="<%=book.publish_year%>">
-              <%= link_to book_path(book.id) do %>
-              <div class="index-card text-left">
-                <div class="bg-picture index-card-img" style="background-image: url(<%= book.picture %>);">
-                </div>
-                <div class="index-card-content no-margin">
-                  <h4 class="index-card-title no-margin"><%= book.title %></h4>
-                  <div class="index-card-description">
-                    <h5 class="no-margin"><%= cutoff_text(book.author) %></h5>
-                    <h5 class="no-margin book-price-highlight"><%= book.price %>€</h5>
-                    <div class="index-card-student">
-                      <h5 class="no-margin">By <%= book.user.full_name %></h5>
+          <div class="books-cards" id="book-id">
+            <% @books.each do |book| %>
+              <div class="col-xs-12 col-sm-6 col-md-4 space-top-20 selectable-card gen-underline" data-category="<%= book.publish_year%>">
+                <%= link_to book_path(book.id) do %>
+                <div class="index-card text-left">
+                  <div class="bg-picture index-card-img" style="background-image: url(<%= book.picture %>);">
+                  </div>
+                  <div class="index-card-content no-margin">
+                    <h4 class="index-card-title no-margin"><%= book.title %></h4>
+                    <div class="index-card-description">
+                      <h5 class="no-margin"><%= cutoff_text(book.author) %></h5>
+                      <h5 class="no-margin book-price-highlight"><%= book.price %>€</h5>
+                      <div class="index-card-student">
+                        <h5 class="no-margin">By <%= book.user.full_name %></h5>
+                      </div>
                     </div>
                   </div>
                 </div>
+              <% end %>
               </div>
             <% end %>
-            </div>
-          <% end %>
+          </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
 
+<%= content_tag :div, class: "title_information", data: {title: @title} do %>
+<% end %>
+<%= content_tag :div, class: "university_information", data: {university: @university} do %>
+<% end %>
+<%= content_tag :div, class: "user_information", data: {user: @user} do %>
+<!-- gives me an array of objects with user -->
+<% end %>
+
 <%= content_for(:after_js) do %>
 
   <script>
     $(document).ready(function() {
-      $('#year-filters input:checkbox').change(function () {
+      $('#year-filters input:checkbox').change(function() {
         $('#year-filters input:checkbox').not(this).prop('checked', false);
         var selectedCategoryNames = $('#year-filters input:checkbox:checked').map(function () {
           return $(this).attr('name')
@@ -125,12 +142,68 @@
         if (selectedCategoryNames.length === 0) cards.show();
       });
     });
+
     // SlideUp Choice
     $('.header-click').on('click', function() {
       $parent_filter = $(this).closest('.header-box');
       // $parent_filter.siblings().find('.no-display').slideUp();
       $parent_filter.find('.no-display').slideToggle(500, 'swing');
     });
-  </script>
 
+    $('#priceSelect').change(function(){
+      $.ajax({
+        url: "books",
+        type: "GET",
+        dataType: 'json',
+        data: {
+          sort: $('#priceSelect :selected').val(),
+          title: $('.title_information').data('title'),
+          university: $('.university_information').data('university'),
+          // user: $('.user_information').data('user') // Ajax does not like '_'
+        },
+        success: function(result){
+          console.log(result);
+          // Basically if the response header is text/html you need to parse, and if the response header is application/json it is already parsed for you.
+          // Parsed data from jquery success handler for text/html response:
+          // var parsed = JSON.parse(data);
+          // Parsed data from jquery success handler for application/json response:
+          // var parsed = data;
+
+          // var books = JSON.parse(result);
+
+          // var books = result.books;
+          // var users = result.users;
+          var books = result;
+          var length = books.length;
+          var html = "";
+          for (var i = 0; i < length; i++) {
+            html += "<div class='col-xs-12 col-sm-6 col-md-4 space-top-20 selectable-card gen-underline' data-category='" + books[i].publish_year + "'>";
+            html += "<a href='/books/" + books[i].id + "'>" ;
+            html += "<div class='index-card text-left'>";
+            html += "<div class='bg-picture index-card-img' style='background-image: url(" + books[i].picture.url + ");'>";
+            html += "</div>";
+            html += "<div class='index-card-content no-margin'>";
+            html += "<h4 class='index-card-title no-margin'>" + books[i].title + "</h4>";
+            html += "<div class='index-card-description'>";
+            html += "<h5 class='no-margin'>" + books[i].author + "</h5>";
+            html += "<h5 class='no-margin book-price-highlight'>" + (books[i].price.fractional/100) + "€</h5>";
+            html += "<div class='index-card-student'>";
+            html += "<h5 class='no-margin'>By " + books[i].user_fullname + "</h5>";
+            html += "</div>";
+            html += "</div>";
+            html += "</div>";
+            html += "</div>";
+            html += "</a>";
+            html += "</div>";
+          }
+          document.getElementById("book-id").innerHTML = html
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          alert(xhr.status);
+          alert(thrownError);
+        }
+      })
+    });
+
+  </script>
 <% end %>

@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :books do
     resources :users
+    # collection do
+    #     get 'sortable'
+    #   end
   end
   resources :users do
     member do
