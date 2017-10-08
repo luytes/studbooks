@@ -13,7 +13,11 @@
           <div class="col-xs-12 col-s-4 col-sm-4"><%= f.input :title, required: false, placeholder: "Title or Author", label: false %></div>
           <div class="col-xs-12 col-s-4 col-sm-4">
             <%= simple_fields_for :users do |r| %>
-              <%= r.input :university, required: false, placeholder: "University", label: false %>
+              <% if user_signed_in? %>
+                <%= r.input :university, required: false, placeholder: "University", label: false, :input_html => { value: user.university } %>
+              <% else %>
+                <%= r.input :university, required: false, placeholder: "University", label: false %>
+              <% end %>
             <% end %>
           </div>
           <div class="col-xs-12 col-s-4 col-sm-4"><%= f.button :submit, 'search', class: "btn" %></div>
