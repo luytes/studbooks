@@ -9,12 +9,12 @@
                 <%= @books.count %> results
                 <!-- Using the dig method -->
                 <!-- <#% if params[:book][:title].present? %> -->
-                <% if params.dig("book", "title").nil? %>
+                <% if params.dig("book", "title") != "" %>
                   <!-- for <#%= params[:book][:title] %> -->
                   for <%= params.dig("book", "title") %>
                 <% end %>
                 <!-- <#% if params[:users][:university].present? %> -->
-                <% if params.dig("users", "university").nil? %>
+                <% if params.dig("users", "university") != "" %>
                   <!-- at <#%= params[:users][:university] %> -->
                   at <%= params.dig("users", "university") %>
                 <% end %>
