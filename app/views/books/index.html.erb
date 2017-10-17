@@ -7,16 +7,15 @@
             <div class="numberResult">
               <h5 class="search-content">
                 <%= @books.count %> results
-                <!-- Using the dig method -->
                 <!-- <#% if params[:book][:title].present? %> -->
-                <% if params.dig("book", "title").nil? %>
+                <% if params.dig("book", "title") != "" %>
                   <!-- for <#%= params[:book][:title] %> -->
-                  for <%= params.dig("book", "title") %>
+                  for "<%= params.dig("book", "title") %>"
                 <% end %>
                 <!-- <#% if params[:users][:university].present? %> -->
-                <% if params.dig("users", "university").nil? %>
+                <% if params.dig("users", "university") != "" %>
                   <!-- at <#%= params[:users][:university] %> -->
-                  at <%= params.dig("users", "university") %>
+                  at "<%= params.dig("users", "university") %>"
                 <% end %>
               </h5>
             </div>
@@ -25,7 +24,6 @@
             <div class="sortBy">
               <h5 class="search-content">
                 Sort by
-                <!-- <select id="priceSelect" onchange="priceFunction()"> -->
                 <select id="priceSelect">
                   <option value="Best Results" selected="selected">Best Results</option>
                   <option value="Price Descending">Price Descending</option>
