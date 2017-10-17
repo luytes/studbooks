@@ -6,6 +6,12 @@ class User < ApplicationRecord
 
   after_create :send_welcome_email
   before_create :confirmation_token
+  before_save do |user|
+    user.first_name = user.first_name.titleize
+    user.last_name = user.last_name.titleize
+    user.email = user.email.downcase
+    user.university = user.university.titleize
+  end
 
   mount_uploader :picture, PhotoUploader
 
