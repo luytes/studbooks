@@ -11,12 +11,11 @@
 
     <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
-      <p>hello</p>
 
       <!-- Profile picture and dropdown -->
       <div class="navbar-item">
         <div class="dropdown">
-          <%= image_tag current_user.picture || "http://placehold.it/30x30", class: "avatar dropdown-toggle", id: "navbar-menu", "data-toggle" => "dropdown" %>
+          <%= image_tag current_user.picture.present? || "http://placehold.it/30x30", class: "avatar dropdown-toggle", id: "navbar-menu", "data-toggle" => "dropdown" %>
 
           <ul class="dropdown-menu dropdown-menu-right navbar-dropdown-menu">
             <li>
@@ -35,7 +34,7 @@
 
     <% else %>
       <!-- Login and Signup Button -->
-       <div class="navbar-item">
+       <div class="navbar-avatar">
         <ul class="list-inline no-marg-bot navigation">
           <li class="space-right"><%= link_to t(".sign_up", default: "Sign Up"), new_user_registration_path %></li>
           <li class="space-right"><%= link_to t(".sign_in", default: "Login"), new_user_session_path %></li>
